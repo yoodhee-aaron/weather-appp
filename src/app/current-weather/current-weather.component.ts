@@ -9,7 +9,16 @@ import {ICurrentWeather} from '../interfaces';
 export class CurrentWeatherComponent implements OnInit {
 
   current: ICurrentWeather;
-  constructor() { }
+  constructor() {
+    this.current = {
+      city: 'bethesda',
+      country: 'US',
+      date: new Date(),
+      image: 'assets/img/sunny,svg',
+      temperature: 72,
+      description: 'sunny',
+    } as ICurrentWeather;
+   }
 
   ngOnInit() {
   }
