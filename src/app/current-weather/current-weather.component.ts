@@ -1,26 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import {ICurrentWeather} from '../interfaces';
+import {WeatherService} from '../services/weather.service';
+import { catchError } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-current-weather',
   templateUrl: './current-weather.component.html',
-  styleUrls: ['./current-weather.component.scss']
+  styleUrls: ['./current-weather.component.scss'],
 })
 export class CurrentWeatherComponent implements OnInit {
 
   current: ICurrentWeather;
-  constructor() {
-    this.current = {
-      city: 'bethesda',
-      country: 'US',
-      date: new Date(),
-      image: 'assets/img/sun-solid.svg',
-      temperature: 72,
-      description: 'sunny',
-    } as ICurrentWeather;
-   }
+  constructor(private weatherService: WeatherService ) {
+    }
 
   ngOnInit() {
+      this.weatherSession();
   }
+  weatherSession() {
+    this.weatherService.weatherAPI('London', 'UK')
+    .subscribe(data => (this.current = data));
 
+  }
 }
